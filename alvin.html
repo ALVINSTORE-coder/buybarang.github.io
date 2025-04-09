@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QRIS & Panel Shop Alvin</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    body, html {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+    video#bg-video {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: cover;
+      z-index: -1;
+    }
+    .nav {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 2;
+    }
+    .menu-btn {
+      font-size: 24px;
+      color: white;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .menu {
+      display: none;
+      position: absolute;
+      right: 0;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .menu a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      margin-bottom: 5px;
+    }
+    .container, .buy-panel {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      text-align: center;
+      z-index: 1;
+    }
+    .buy-panel {
+      display: none;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      border-radius: 15px;
+    }
+    .panel-item {
+      margin: 10px 0;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 10px;
+      border-radius: 10px;
+    }
+    button {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 8px;
+      background-color: #25D366;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+    .back-btn {
+      margin-top: 20px;
+      background-color: crimson;
+    }
+    img.qris {
+      width: 200px;
+      margin: 20px 0;
+      border-radius: 15px;
+      box-shadow: 0 0 20px white;
+    }
+  </style>
+</head>
+<body>
+
+<video id="bg-video" autoplay muted loop>
+  <source src="https://files.catbox.moe/qudl6x.mp4" type="video/mp4">
+</video>
+
+<audio id="bg-music" loop>
+  <source src="https://files.catbox.moe/qudl6x.mp4" type="audio/mp4">
+</audio>
+
+<div class="nav">
+  <button class="menu-btn" onclick="toggleMenu()">≡</button>
+  <div class="menu" id="menu">
+    <a href="#" onclick="showPanel()">BUY PANEL</a>
+  </div>
+</div>
+
+<div class="container" id="main-content">
+  <h2>Scan QRIS Di Bawah</h2>
+  <p>Setelah scan, kirim screenshot ke admin:</p>
+  <img src="https://files.catbox.moe/2c0auy.jpeg" class="qris">
+  <br>
+  <a href="https://wa.me/6283106133182" target="_blank"><button>Kirim ke Admin</button></a>
+</div>
+
+<div class="buy-panel" id="panel-shop">
+  <h2>List Panel Pterodactyl</h2>
+  <div id="panel-list"></div>
+  <button class="back-btn" onclick="backToQR()">Kembali</button>
+</div>
+
+<script>
+  const bgMusic = document.getElementById('bg-music');
+  const panelList = document.getElementById('panel-list');
+
+  function toggleMenu() {
+    const menu = document.getElementById("menu");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+  }
+
+  function showPanel() {
+    document.getElementById("main-content").style.display = "none";
+    document.getElementById("panel-shop").style.display = "block";
+    bgMusic.play();
+
+    // Auto generate 1GB - 10GB
+    panelList.innerHTML = '';
+    for (let i = 1; i <= 10; i++) {
+      panelList.innerHTML += `
+        <div class="panel-item">
+          <p>${i}GB Panel Pterodactyl</p>
+          <a href="https://wa.me/6283106133182?text=Halo%20saya%20mau%20beli%20panel%20${i}GB" target="_blank">
+            <button>Beli Sekarang</button>
+          </a>
+        </div>`;
+    }
+  }
+
+  function backToQR() {
+    document.getElementById("panel-shop").style.display = "none";
+    document.getElementById("main-content").style.display = "block";
+  }
+</script>
+
+</body>
+</html>
